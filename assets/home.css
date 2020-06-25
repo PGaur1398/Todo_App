@@ -1,0 +1,86 @@
+body {
+    margin: 0;
+    font-size: 0.88rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: left;
+    background-color: whitesmoke;
+}
+.completed{
+    text-decoration: line-through;
+}
+
+.container {
+    margin-top: 100px
+}
+.card-2{
+    margin-bottom: 100px
+}
+.card {
+    box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03), 0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03), 0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05), 0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
+    border-width: 0;
+    transition: all .2s
+}
+.heading{
+    font-family: sans-serif;
+    font-weight: 800;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: 10px;
+}
+.btn-trash{
+   color: rgb(241, 13, 13);
+}
+.on-hover:hover .btn-trash{
+    color: white;
+ }
+.btn-right{
+    position: absolute;
+right: 10px;
+}
+
+.timestamp {
+    color: #858a8e;
+    font-size: 10px;
+
+}
+.scroll-area-sm {
+    height: 288px;
+    overflow-x: hidden
+}
+
+.todo-indicator {
+    position: absolute;
+    width: 4px;
+    height: 60%;
+    border-radius: 0.3rem;
+    left: 0.625rem;
+    top: 20%;
+    opacity: .6;
+    transition: opacity .2s
+}
+
+.content {
+    padding: 1rem;
+    flex-direction: row;
+    align-items: center
+}
+
+.content-wrapper {
+    display: flex;
+    flex: 1;
+    position: relative;
+    align-items: center
+}
+
+.content-right {
+    margin-left: auto
+}
+
+
+.card-footer {
+    background-color: #fff
+}
+
+

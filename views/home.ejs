@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title><%= title %></title>
+<!-- Importing bootstrap cdn -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<!-- Importing Font Awesome -->
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+<!-- Adding home.css -->
+<link rel="stylesheet" href="/home.css">
+<!-- importing jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- importing Popper.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+<!-- importing bootstrap.min.js -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="d-flex justify-content-center container">
+        <div class="col-md-8">
+            <div class="mb-3 card">
+            <div class="card">
+          <div class="card-body">
+            <h1 class="card-title heading"><i class="fa fa-th-list"></i>&nbsp;TODO LIST</h1>
+          <!-- Form Field -->
+  <form action="/create" method = "POST">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+          <label for="description"><b>Description</b></label>
+   <input type="text" class="form-control" name = "description" placeholder="Task Description.." required>
+  </li>
+  <li class="list-group-item">
+    <label for="category"><b>Category</b></label>
+      <select class="form-control" name = "category" id="exampleFormControlSelect1" required>
+      <option selected disabled value="">Choose a Category</option>
+        <option>Personel</option>
+        <option>Work</option>
+        <option>School</option>
+        <option>Cleaning</option>
+        <option>Others</option>
+      </select>
+  </li>
+  <li class="list-group-item">
+    <label for="due-date" ><b>Deadline</b></label>
+     <input type="date" class="form-control" name = "date" required>
+     
+     </li>
+     <li class="list-group-item">
+      <br>
+     <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;Add Task</button>
+     <span class="dropdown btn-right">
+    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-filter"></i>
+     Sort
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="#">Increasing</a>
+      <a class="dropdown-item" href="#">Decreasing</a>
+    </div>
+  </span>
+  
+  </li>
+  </ul>
+  </form>
+</div>
+</div>
+      </div>
+      <div class="card card-2">
+      <div class="card-body">
+          <div><h5><i class="fa fa-tasks"></i> Task Lists</h5> </div>
+
+         <div class="scroll-area-sm">
+            <perfect-scrollbar class="ps-show-limits">
+            <div class="ps-content">
+                <ul class=" list-group list-group-flush">
+                    <% for(let i of todo_lists) { %>
+                    <li class="list-group-item">
+                        <div class="todo-indicator bg-primary"></div>
+                        <div class="content p-0">
+                        <div class="content-wrapper">
+                          <% if(!i.checkbox) { %>
+                            <div class="custom-checkbox custom-control"><input type="checkbox" class="custom-control-input chkbox" id="<%= i._id %>" unchecked><label class="custom-control-label" for="<%= i._id %>">&nbsp;</label></div>
+                          <% } %>
+                          <% if(i.checkbox) { %>
+                            <div class="custom-checkbox custom-control"><input type="checkbox" class="custom-control-input chkbox" id="<%= i._id %>" checked><label class="custom-control-label" for="<%= i._id %>">&nbsp;</label></div>
+                            <% } %>
+                            <div class="content-left">
+                                <div class="widget-heading">
+                                    <% if(i.checkbox) { %>
+                                 <span class ="descriptions completed"><%= i.description%>&nbsp</span>
+                                 <% } %>
+                                 <% if(!i.checkbox) { %>
+                                  <span class = "descriptions"><%= i.description%>&nbsp</span>
+                                  <% } %>
+                                  <% if(i.category == 'Personel') { %>
+                                  <div class="badge badge-primary"><%= i.category%></div>
+                                  <% } %>
+                                  <% if(i.category == 'Work') { %>
+                                    <div class="badge badge-success"><%= i.category%></div>
+                                  <% } %>
+                                  <% if(i.category == 'School') { %>
+                                      <div class="badge badge-info"><%= i.category%></div>
+                                  <% } %>
+                                  <% if(i.category == 'Cleaning') { %>
+                                        <div class="badge badge-warning"><%= i.category%></div>
+                                  <% } %>
+                                  <% if(i.category == 'Others') { %>
+                                    <div class="badge badge-secondary"><%= i.category%></div>
+                                   <% } %>
+                                  </div>
+                                  <% if(i.checkbox) { %>
+                                    <div class="timestamp completed"><i class="fas fa-calendar-alt"></i>&nbsp;<%= i.date.toDateString()%></div>
+                                    <% } %>
+                                    <% if(!i.checkbox) { %>
+                                      <div class="timestamp"><i class="fas fa-calendar-alt"></i>&nbsp;<%= i.date.toDateString()%></div>
+                                      <% } %>
+                                </div>
+                            <div class="content-right on-hover"><a href="/delete-contact/?id=<%= i._id %>"><button class="border-0 btn-transition btn btn-outline-danger"><i class="fa fa-trash btn-trash"></i></a> </button> </div>
+                          </div>
+                        </div>
+                          </li>
+                          <%}%> 
+                  </ul>
+              </div>
+            </perfect-scrollbar>
+            </div>
+            <div class="text-right card-footer"><button class="btn btn-danger" id="delete-btn"><i class="fa fa-trash"></i> Delete Completed</button></div>
+          </div>
+        </div>
+      </div>
+      </div>
+<!-- Adding home.js -->
+<script type="text/javascript" src="/home.js"></script>
+</body>
+</html>
