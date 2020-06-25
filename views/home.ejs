@@ -56,11 +56,13 @@
      <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;Add Task</button>
      <span class="dropdown btn-right">
     <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-filter"></i>
-     Sort
+     Sort By 
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">Increasing</a>
-      <a class="dropdown-item" href="#">Decreasing</a>
+        <a class="dropdown-item" href="#">Deadline</a>
+        <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="/sortAsc">NearestFirst</a>
+      <a class="dropdown-item" href="/sortDesc">NearestLast</a>
     </div>
   </span>
   
@@ -73,11 +75,12 @@
       <div class="card card-2">
       <div class="card-body">
           <div><h5><i class="fa fa-tasks"></i> Task Lists</h5> </div>
-
+        
          <div class="scroll-area-sm">
             <perfect-scrollbar class="ps-show-limits">
             <div class="ps-content">
                 <ul class=" list-group list-group-flush">
+            
                     <% for(let i of todo_lists) { %>
                     <li class="list-group-item">
                         <div class="todo-indicator bg-primary"></div>
@@ -120,7 +123,7 @@
                                       <div class="timestamp"><i class="fas fa-calendar-alt"></i>&nbsp;<%= i.date.toDateString()%></div>
                                       <% } %>
                                 </div>
-                            <div class="content-right on-hover"><a href="/delete-contact/?id=<%= i._id %>"><button class="border-0 btn-transition btn btn-outline-danger"><i class="fa fa-trash btn-trash"></i></a> </button> </div>
+                            <div class="content-right on-hover"><a href="/remove/?id=<%= i._id %>"><button class="border-0 btn-transition btn btn-outline-danger"><i class="fa fa-trash btn-trash"></i></a> </button> </div>
                           </div>
                         </div>
                           </li>

@@ -6,9 +6,10 @@ module.exports.home = function(req, res){
 
     todo_tasks.find({}, function(err, todos){
         if(err){
-            console.log('Error in fetching todos from db');
+            console.log('Error in fetching data from db');
             return;
         }
+
         return res.render('home',{
          title: "Todo App",
          todo_lists: todos
@@ -59,4 +60,29 @@ module.exports.delete = function(req,res){
     console.log(data);
     return res.status(200).json(data);  
    });
+}
+//sorting in ascending order by time
+module.exports.sortAsc = function(req,res){
+    todo_tasks.find({},null,{sort : {date : 1}},function(err,todos){
+        if(err){
+            console.log('Error in sorting !');
+            return;
+        }
+        return res.render('home',{
+            title: "Todo App",
+            todo_lists: todos
+           });
+    });
+}
+module.exports.sortDesc = function(req,res){
+    todo_tasks.find({},null,{sort : {date : -1}},function(err,todos){
+        if(err){
+            console.log('Error in sorting !');
+            return;
+        }
+        return res.render('home',{
+            title: "Todo App",
+            todo_lists: todos
+           });
+    });
 }
